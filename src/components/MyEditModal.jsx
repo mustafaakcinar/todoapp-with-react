@@ -5,7 +5,9 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useTodoContext } from "../context/TodoProvider";
+import Swal from "sweetalert2";
 
 const style = {
   position: "absolute",
@@ -22,9 +24,37 @@ const style = {
 };
 
 export default function MyEditModal({editTodo, handleClose, open }) {
+console.log(editTodo);
+  const [deneme, setDeneme] = useState({})
 
-  const [deneme, setDeneme] = useState(editTodo)
-  
+  const { editTask } = useTodoContext()
+
+  useEffect(() => {
+    setDeneme(editTodo) 
+  },[editTodo])
+
+  console.log(deneme);
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if(deneme.task.trim()){
+      const editedTask = {
+        task:deneme.task,
+        ...deneme
+      }
+      editTask(editedTask)
+      handleClose()
+    }else{
+      handleClose()
+      Swal.fire({
+        title: "Alanı Doldurmadınız!!!",
+        text: "Geçersiz giriş yaptınız!",
+        icon: "error",
+      });
+    }
+  }
+
+
     return (
     <div>
       <Modal
@@ -52,7 +82,7 @@ export default function MyEditModal({editTodo, handleClose, open }) {
               value={deneme.task} 
               onChange={(e) => setDeneme({...deneme, task:e.target.value})}
             />
-            <Button size="small" variant="contained" color="primary">
+            <Button onClick={handleSubmit} size="small" variant="contained" color="primary">
               <EditIcon />
             </Button>
           </Box>

@@ -14,10 +14,11 @@ import MyStyledList from "./MyStyledList";
 import { useTodoContext } from "../context/TodoProvider";
 
 const MyHeader = ({view, handleStyle}) => {
-  const [todo, setTodo] = useState([]);
+  const [todo, setTodo] = useState("");
   const [idx, setIdx] = useState(0);
 
   const {addTodo} = useTodoContext()
+  console.log(todo);
 
   const handleChange = (e) => {
     e.preventDefault();

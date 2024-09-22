@@ -10,9 +10,14 @@ export const useTodoContext = () => {
   return useContext(TodoContext);
 };
 
-const mockAPI_URL = "https://66e440c4d2405277ed13b06f.mockapi.io/todos";
+
+//! api url miz herkese görünmemesi için env dosyası kullanarak gizledik
+
+const mockAPI_URL = process.env.REACT_APP_MOCK_API_URL;
 
 const TodoProvider = ({ children }) => {
+
+  console.log(mockAPI_URL);
   // gelecek olan datamızı tutmak için bir state oluşturduk gelecek olan verilerimizi bunun içerisine yerleştireceğiz.
   const [todoList, setTodoList] = useState([]);
 
