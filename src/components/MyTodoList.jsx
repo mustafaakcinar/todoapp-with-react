@@ -12,7 +12,6 @@ import { useState } from "react";
 const MyTodoList = ({ view }) => {
   const [editTodo, setEditTodo] = useState("");
   const [open, setOpen] = useState(false);
-  const [check, setCheck] = useState();
 
   const handleOpen = (id) => {
     setOpen(true);
