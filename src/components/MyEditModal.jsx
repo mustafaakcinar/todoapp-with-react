@@ -24,23 +24,23 @@ const style = {
 };
 
 export default function MyEditModal({editTodo, handleClose, open }) {
-console.log(editTodo);
-  const [deneme, setDeneme] = useState({})
+// console.log(editTodo);
+  const [editedText, setEditedText] = useState({})
 
   const { editTask } = useTodoContext()
 
   useEffect(() => {
-    setDeneme(editTodo) 
+    setEditedText(editTodo) 
   },[editTodo])
 
-  console.log(deneme);
+  // console.log(deneme);
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if(deneme.task.trim()){
+    if(editedText.task.trim()){
       const editedTask = {
-        task:deneme.task,
-        ...deneme
+        task:editedText.task,
+        ...editedText
       }
       editTask(editedTask)
       handleClose()
@@ -79,8 +79,8 @@ console.log(editTodo);
               id="standard-basic"
               label="Standard"
               variant="standard" 
-              value={deneme.task} 
-              onChange={(e) => setDeneme({...deneme, task:e.target.value})}
+              value={editedText.task} 
+              onChange={(e) => setEditedText({...editedText, task:e.target.value})}
             />
             <Button onClick={handleSubmit} size="small" variant="contained" color="primary">
               <EditIcon />

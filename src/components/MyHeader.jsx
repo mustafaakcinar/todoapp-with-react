@@ -18,7 +18,7 @@ const MyHeader = ({view, handleStyle}) => {
   const [idx, setIdx] = useState(0);
 
   const {addTodo} = useTodoContext()
-  console.log(todo);
+  // console.log(todo);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -59,7 +59,7 @@ const MyHeader = ({view, handleStyle}) => {
         gap: "1rem",
       }}
     >
-      <Typography variant="h2">TO DO LIST</Typography>
+      <Typography mt={3} variant="h3" color="primary">TO DO LIST</Typography>
 
       <Box
         sx={{

@@ -17,7 +17,6 @@ const mockAPI_URL = process.env.REACT_APP_MOCK_API_URL;
 
 const TodoProvider = ({ children }) => {
 
-  console.log(mockAPI_URL);
   // gelecek olan datamızı tutmak için bir state oluşturduk gelecek olan verilerimizi bunun içerisine yerleştireceğiz.
   const [todoList, setTodoList] = useState([]);
 
@@ -34,7 +33,7 @@ const TodoProvider = ({ children }) => {
     //? res.data şeklinde erişmemiz gerekiyordu burada destur yöntemiyle direk dataya eriştik
     try {
       const { data } = await axios.get(mockAPI_URL);
-      console.log(data);
+      // console.log(data);
       setTodoList(data);
     } catch (error) {
       console.log(error);

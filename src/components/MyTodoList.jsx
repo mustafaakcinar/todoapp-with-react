@@ -12,6 +12,7 @@ import { useState } from "react";
 const MyTodoList = ({ view }) => {
   const [editTodo, setEditTodo] = useState("");
   const [open, setOpen] = useState(false);
+  const [check, setCheck] = useState();
 
   const handleOpen = (id) => {
     setOpen(true);
@@ -21,7 +22,19 @@ const MyTodoList = ({ view }) => {
 
   const handleClose = () => setOpen(false);
 
-  const { deleteTodo, todoList } = useTodoContext();
+  const { deleteTodo, todoList, editTask } = useTodoContext();
+
+  const handleDoubleClick = (id) => {
+    const checkedTodo = todoList.filter((item) => item.id === id)[0];
+    // console.log(checkedTodo);
+    const checked = {
+      ...checkedTodo,
+      taskStatus: !checkedTodo.taskStatus,
+    };
+    console.log(checked);
+    editTask(checked);
+  };
+
   return (
     <>
       <Box
@@ -56,18 +69,23 @@ const MyTodoList = ({ view }) => {
                   key={id}
                   disablePadding
                   sx={{
-                    textDecoration: taskStatus ? "line-through" : "none",
                     padding: "0.3rem",
                     backgroundColor: "#FAFDC7",
                     borderRadius: "10px",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    opacity: taskStatus ? 0.6 : 1,
+                    userSelect:"none"
                   }}
+                  onDoubleClick={() => handleDoubleClick(id)}
                 >
                   <ListItemButton>
                     <ListItemText
-                      sx={{ fontSize: "2rem" }}
+                      sx={{
+                        fontSize: "2rem",
+                        textDecoration: taskStatus ? "line-through" : "none",
+                      }}
                       id={labelId}
                       primary={`${task}`}
                     />
@@ -85,7 +103,8 @@ const MyTodoList = ({ view }) => {
                       onClick={() => handleOpen(id)}
                       size="small"
                       variant="contained"
-                      color="primary"
+                      color="primary" 
+                      disabled={taskStatus}
                     >
                       <EditIcon />
                     </Button>
@@ -115,6 +134,7 @@ const MyTodoList = ({ view }) => {
             {todoList.map(({ id, task, taskStatus }) => (
               <Card
                 key={id}
+                onDoubleClick={() => handleDoubleClick(id)}
                 sx={{
                   width: 250,
                   height: 250,
@@ -132,6 +152,8 @@ const MyTodoList = ({ view }) => {
                   flexDirection: "column",
                   justifyContent: "space-between",
                   borderRadius: "10px",
+                  opacity: taskStatus ? 0.6 : 1,
+                  userSelect:"none"
                 }}
               >
                 <CardContent>
@@ -145,14 +167,15 @@ const MyTodoList = ({ view }) => {
                     gap: "0.5rem",
                   }}
                 >
-                  <Button
-                    onClick={() => handleOpen(id)}
-                    size="small"
-                    variant="contained"
-                    color="primary"
-                  >
-                    <EditIcon />
-                  </Button>
+                   <Button
+                      onClick={() => handleOpen(id)}
+                      size="small"
+                      variant="contained"
+                      color="primary" 
+                      disabled={taskStatus}
+                    >
+                      <EditIcon />
+                    </Button>
                   <Button
                     onClick={() => deleteTodo(id)}
                     size="small"
