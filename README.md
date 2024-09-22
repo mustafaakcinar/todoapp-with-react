@@ -1,13 +1,13 @@
 # Todo List App
 
-Bu proje, React ve Material-UI (MUI) kullanarak geliştirilmiş bir Todo List uygulamasıdır. Uygulama, kullanıcıların görev ekleyip, düzenleyip ve tamamlayıp tamamlamadığını takip etmelerini sağlar. Veriler, Axios kullanarak bir mock API'den alınmaktadır.
+This project is a Todo List application developed using React and Material-UI (MUI). The application allows users to track whether they have added, edited and completed tasks. The data is taken from a mock API using Axios.
 
 ## Features
 
-- Görev ekleme, düzenleme ve silme
-- Görevlerin tamamlanma durumu takibi
-- Responsive tasarım
-- Kullanıcı dostu arayüz
+- Adding, editing and deleting tasks
+- Tracking the completion status of tasks
+- Responsive Design
+- User-friendly interface
 
 ## Technologies
 
