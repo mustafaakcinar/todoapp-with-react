@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 // ilk önce contextimizi oluşturduk
 const TodoContext = createContext();
 
-// contextimizi direk kullanabilmek için custom bir hook oluşturduk burada returnu contextimizin useContext kullanmını döndürmesini sağladık
+// contextimizi direk kullanabilmek için custom bir hook kullanıldı.
 
 export const useTodoContext = () => {
   return useContext(TodoContext);
@@ -13,7 +13,6 @@ export const useTodoContext = () => {
 
 
 //! api url miz herkese görünmemesi için env dosyası kullanarak gizledik
-
 const mockAPI_URL = process.env.REACT_APP_MOCK_API_URL;
 
 const TodoProvider = ({ children }) => {
@@ -26,11 +25,10 @@ const TodoProvider = ({ children }) => {
     getTodos();
   }, []);
 
-  // ^ axios get from mockAPI herhangi bir şey yazmasakta get olarak kullanabilirdik burada yazmayı tercih ettik
-  // ? then catch ile de yapabilirdik ben async await yapısını tercih ettim
+   // ? then catch ile de yapabilirdik burada async await yapısını tercih edilmiş
 
   const getTodos = async () => {
-    //* burada kontrol edip verilerin yerini gördükten sonra destur yöntemi ile direk datayı almayı tercih ettim yoksa res veya response kullanarakta erişebilirdik.
+    //* burada kontrol edip verilerin yerini gördükten sonra destur işlemi yapılabilir
     //? res.data şeklinde erişmemiz gerekiyordu burada destur yöntemiyle direk dataya eriştik
     try {
       const { data } = await axios.get(mockAPI_URL);
