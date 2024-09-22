@@ -31,7 +31,7 @@ const MyTodoList = ({ view }) => {
       ...checkedTodo,
       taskStatus: !checkedTodo.taskStatus,
     };
-    console.log(checked);
+    // console.log(checked);
     editTask(checked);
   };
 

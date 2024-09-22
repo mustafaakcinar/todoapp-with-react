@@ -6,7 +6,7 @@ import { useTodoContext } from "../context/TodoProvider";
 
 const HomePage = () => {
   const [view, setView] = useState("list");
-  const { todoList, setTodoList } = useTodoContext();
+  const { todoList } = useTodoContext();
 
   const handleStyle = (event, nextView) => {
     setView(nextView);
